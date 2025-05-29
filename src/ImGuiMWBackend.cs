@@ -453,7 +453,7 @@ public class ImGuiMWBackend : IDisposable
         commandBuffer.PopDebugGroup();
     }
 
-    public void Render(MoonWorks.Graphics.CommandBuffer cb, RenderPass pass)
+    public void Render(CommandBuffer cb, RenderPass pass)
     {
         ImDrawDataPtr drawData = ImGui.GetDrawData();
 
@@ -468,7 +468,7 @@ public class ImGuiMWBackend : IDisposable
             Matrix4x4.CreateOrthographicOffCenter(
                 0.0f, Game.MainWindow.Width, Game.MainWindow.Height, 0.0f, -1.0f, 1.0f
             )
-        );
+        ); 
 
         pass.BindGraphicsPipeline(pipeline);
         pass.BindVertexBuffers(vertexBuf);
@@ -485,17 +485,27 @@ public class ImGuiMWBackend : IDisposable
             {
                 ImDrawCmdPtr drawCmd = cmdList.CmdBuffer[i];
 
-                var width = drawCmd.ClipRect.Z - (int)drawCmd.ClipRect.X;
-                var height = drawCmd.ClipRect.W - (int)drawCmd.ClipRect.Y;
-                pass.SetScissor(
-                                        new Rect(
-                                            (int)drawCmd.ClipRect.X,
-                                            (int)drawCmd.ClipRect.Y,
-                                            (int)width,
-                                            (int)height
-                                        )
-                                    );
+                Vector2 clipMin = new Vector2(
+                    Math.Max(0.0f, drawCmd.ClipRect.X),
+                    Math.Max(0.0f, drawCmd.ClipRect.Y)
+                );
 
+                Vector2 clipMax = new Vector2(
+                    Math.Min(drawCmd.ClipRect.Z, Game.MainWindow.Width),
+                    Math.Min(drawCmd.ClipRect.W, Game.MainWindow.Height)
+                );
+
+                if (clipMax.X <= clipMin.X || clipMax.Y <= clipMin.Y)
+                {
+                    continue;
+                }
+
+                pass.SetScissor(new Rect(
+                    (int)clipMin.X,
+                    (int)clipMin.Y,
+                    (int)(clipMax.X - clipMin.X),
+                    (int)(clipMax.Y - clipMin.Y)
+                ));
 
                 pass.BindFragmentSamplers(GetTextureBinding(drawCmd.TextureId));
 
