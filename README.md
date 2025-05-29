@@ -23,14 +23,10 @@ Alternatively, here’s a quick preview:
             backend = new ImGuiMWBackend(this);
         }
 
+        
         protected override void Draw(double alpha)
         {
             ImGui.Render();
-
-            var io = ImGui.GetIO();
-            var drawDataPtr = ImGui.GetDrawData();
-
-
 
             var commandBuffer = GraphicsDevice.AcquireCommandBuffer();
             var swapchainTexture = commandBuffer.AcquireSwapchainTexture(MainWindow);
