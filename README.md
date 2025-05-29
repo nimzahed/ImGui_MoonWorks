@@ -3,6 +3,8 @@ This is a [MoonWorks](https://github.com/MoonsideGames/MoonWorks) backend for th
 
 This backend is built on top of [ImGui.NET](https://github.com/ImGuiNET/ImGui.NET), which allows you to build graphical interfaces using a simple immediate-mode style. ImGui.NET is a .NET Standard library and is compatible with all major .NET runtimes and operating systems.
 
+I got some help [here](https://gist.github.com/darkerbit/6bfb661d7ce9263ddd7dcc7b475460e0).
+
 # Usage
 You can view the full script [here](https://github.com/nimzahed/ImGui_MoonWorks/blob/main/example/ImGui.net_MoonWorks.cs).
 
