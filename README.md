@@ -51,6 +51,7 @@ Alternatively, here’s a quick preview:
             ImGui.ShowDemoWindow();
             backend.EndFrame();
         }
+    }
 ```
 
 # See Also
