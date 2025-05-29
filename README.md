@@ -14,7 +14,8 @@ Alternatively, here’s a quick preview:
     {
         ImGuiMWBackend backend;
 
-        public MWGame(AppInfo appInfo, WindowCreateInfo windowCreateInfo, FramePacingSettings framePacingSettings, ShaderFormat availableShaderFormats, bool debugMode = false) : base(appInfo, windowCreateInfo, framePacingSettings, availableShaderFormats, debugMode)
+        public MWGame(AppInfo appInfo, WindowCreateInfo windowCreateInfo, FramePacingSettings framePacingSettings, ShaderFormat availableShaderFormats, bool debugMode = false)
+            : base(appInfo, windowCreateInfo, framePacingSettings, availableShaderFormats, debugMode)
         {
 
             backend = new ImGuiMWBackend(this);
