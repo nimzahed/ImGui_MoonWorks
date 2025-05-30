@@ -24,7 +24,7 @@ namespace YourProject
 
             ShaderFormat format = ShaderFormat.SPIRV;
 
-            Game g = new MWGame(appInfo, windowCreateInfo, framePacingSettings, format, true);
+            Game g = new MWGame(appInfo, windowCreateInfo, framePacingSettings, format, isDebug);
             g.Run();
             
         }
